@@ -1,0 +1,38 @@
+/*
+     _    _ _                       ____  _     _             _ _ _      
+   / \  | (_)_ __  _   _ ___      | __ )(_) __| | ___  _   _(_) | | ___ 
+  / _ \ | | | '_ \| | | / __|_____|  _ \| |/ _` |/ _ \| | | | | | |/ _ \
+ / ___ \| | | | | | |_| \__ \_____| |_) | | (_| | (_) | |_| | | | |  __/
+/_/   \_\_|_|_| |_|\__,_|___/     |____/|_|\__,_|\___/ \__,_|_|_|_|\___|
+                                                                               
+ Ce sketch genere une impulsion sur la sortie dès que le contact entre masse et et pin 02 est ouvert
+ si le contact 02 se referme il n'y a pas de generation d'impulsion
+
+ Utile pour signaler  une alarme une seule  fois  et ne rien faire si la situation redevient normale j'usque à la prochaine alarme
+
+
+*/
+#define led 12 (relay)
+
+void setup(){
+
+  pinMode(led,OUTPUT);
+  //digitalWrite(led,LOW);
+attachInterrupt(0,test,RISING);
+//attachInterrupt(0,test,CHANGE ou RISING,FALLING,LOW);// 0 =numéro de la broche utilisée pour l’interruption (0 pour la broche 2 et 1 pour la broche 3)
+// test= la fonction a utiliser
+}
+
+void  test(){
+digitalWrite(led,HIGH);
+delay(1000);
+
+}
+
+void loop(){
+if (digitalRead(led)==1){
+  delay(2000);
+  digitalWrite(led,LOW);
+}
+
+}
